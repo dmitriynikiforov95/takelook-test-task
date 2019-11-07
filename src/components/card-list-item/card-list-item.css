@@ -1,0 +1,33 @@
+
+.ant-card .card-list-item {
+    position: relative;
+}
+.card-list-item {
+    width: 300px;
+}
+
+.card-list-item__tag-list {
+    display: flex;
+    list-style:none;
+    padding: 0;
+    margin:0;
+}
+.card-list-item__price {
+    position: absolute;
+    padding:0 5px;
+    top:20px;
+    right:0;
+    color:white;
+
+    background-color:#1E90FF;
+}
+.card-list-item__tag-list-item {
+    margin-right: 5px;
+    color:#69c0ff;
+}
+.span {
+    margin-right: 5px;
+}
+.card-list-item__tag-list-item:last-child .card-list-item__tag-list-item-comma {
+    display:none;
+}
