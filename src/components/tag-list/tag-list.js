@@ -1,23 +1,17 @@
 import React from "react";
 
-import { connect } from "react-redux";
-
-import { tagRemovedFromTaglist } from "../../actions";
-
 import { Tag } from "antd";
 
-// Почему закрывается сразу 2 тэга и один не рендериться ?
-// Сделать нормальное отображение флекс элементов, когда используешь фильтр
 
-const TagListContainer = ({ tags, tagRemovedFromTaglist }) => {
-  const tagList = tags.map((item, idx) => {
+const TagList = ({ selectedTags, removeTagFromSelected }) => {
+  const tagList = selectedTags.map((item) => {
     return (
       <Tag
         closable
-        key={idx} // убраать еслине будет работать
+        key={item}
         onClose={e => {
           e.preventDefault();
-          tagRemovedFromTaglist(idx);
+          removeTagFromSelected(item);
         }}
       >
         {item}
@@ -28,17 +22,4 @@ const TagListContainer = ({ tags, tagRemovedFromTaglist }) => {
   return <div>{tagList}</div>;
 };
 
-const mapStateToProps = ({ tags }) => {
-  return {
-    tags
-  };
-};
-
-const mapDispatchToProps = {
-  tagRemovedFromTaglist
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TagListContainer);
+export default TagList;

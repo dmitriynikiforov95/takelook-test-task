@@ -1,56 +1,62 @@
+import {sortByPrice} from "../helpers";
 
-const cardsLoaded = newBooks => {
+const studiosLoaded = studios => {
   return {
-    type: "FETCH_CARDS_SUCCESS",
-    payload: newBooks
+    type: "FETCH_STUDIOS_SUCCESS",
+    payload: studios
   };
 };
 
-const changeRangeFilter = value => {
+const fetchStudios = (dispatch, takelookService) => () => {
+  takelookService
+    .getStudios()
+    .then(res => {
+      res.sort(sortByPrice)
+      dispatch(studiosLoaded(res))
+    })
+};
+
+const changePriceFilterRangeValue = ([min, max]) => {
   return {
-    type: "CHANGE_RANGE_FILTER",
+    type: "CHANGE_PRICE_FILTER_SELECTED_RANGE_VALUE",
     payload: {
-      min: value[0],
-      max: value[1]
+      min,
+      max
     }
   };
 };
 
-
-const tagAddedToTaglist = tagId => {
+const addTagToSelected = tag => {
   return {
     type: "TAG_ADDED_TO_TAGLIST",
-    payload: tagId
+    payload: tag
   };
 };
 
-const tagRemovedFromTaglist = tagId => {
+const removeTagFromSelected = tag => {
   return {
     type: "TAG_REMOVED_FROM_TAGLIST",
-    payload: tagId
+    payload: tag
   };
 };
 
-const findSearchTags = value => {
+const findSearchingTags = studios => {
   return {
-    type: "FIND_SEARCH_TAGS",
-    payload: value
+    type: "FIND_SEARCHING_TAGS",
+    payload: studios
   };
 };
 
-
-
-const changeTerm = term => {
+const changeSmartSearchPanelValue = term => {
   return {
-    type: "CHANGE_TERM",
+    type: "SMART_SEARCH_PANEL_VALUE_CHANGED",
     payload: term
   };
 };
 
-
-const setCurrentRangeValue = (min, max) => {
+const setCurrentPriceFilterRangeValue = (min, max) => {
   return {
-    type: "SET_CURRENT_RANGE_VALUE",
+    type: "SET_CURRENT_PRICE_FILTER_RANGE_VALUE",
     payload: {
       min,
       max
@@ -58,24 +64,23 @@ const setCurrentRangeValue = (min, max) => {
   };
 };
 
-const setDefaultRangeValue = (min, max) => {
+const setDefaultPriceFilterRangeValue = (min, max) => {
   return {
-    type: "SET_DEFAULT_RANGE_VALUE",
+    type: "SET_DEFAULT_PRICE_FILTER_RANGE_VALUE",
     payload: {
       min,
       max
     }
   };
 };
-
 
 export {
-  cardsLoaded,
-  changeRangeFilter,
-  setCurrentRangeValue,
-  setDefaultRangeValue,
-  tagAddedToTaglist,
-  tagRemovedFromTaglist,
-  findSearchTags,
-  changeTerm
+  changePriceFilterRangeValue,
+  setCurrentPriceFilterRangeValue,
+  setDefaultPriceFilterRangeValue,
+  addTagToSelected,
+  removeTagFromSelected,
+  findSearchingTags,
+  changeSmartSearchPanelValue,
+  fetchStudios
 };

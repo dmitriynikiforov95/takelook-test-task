@@ -74,6 +74,7 @@
   transform: translate(-50px, -50px) scale(0.5) translate(50px, 50px);
 }
 .lds-css.wrapper {
+  margin-top:20px;
   padding: 20px 20px;
   padding-top:26px;
   margin-bottom:20px;

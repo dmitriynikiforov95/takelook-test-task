@@ -1,111 +1,92 @@
 const initialState = {
-  cards: [],
-  tags: ["камин"],
-  term: "",
+  studios: [],
+  studiosLoading: true,
+  selectedTags:["камин"],
   variableTags: [],
-  loading: true,
-  selectedPriceRange: [0, 500],
-  defaultPriceRange: {
-    min: 0,
-    max: 500
+  smartSeachPanelValue: "",
+  selectedPriceFilterRange: [],
+  defaultPriceFilterRange: {
+    min: null,
+    max: null
   }
 };
 
-// 1) Сделать одну функцию
+const addTagToSelected = (state, selectedTag) => {
+  if (state.selectedTags.find(tag => tag === selectedTag)) {
+    return state;
+  }
 
-const addTagToList = (state, tag) => {
-  let test = state.cards.filter(card => {
-    for (let params of card.params) {
-      if (params == tag) return true;
-    }
-  });
-
-  if (!test.length == 0) {
-    const item = state.tags.findIndex(
-      currentValue => currentValue == tag.toLowerCase()
-    );
-
-    if (item == -1) {
-      return {
-        ...state,
-        tags: [...state.tags, tag]
-      };
-    } else {
-      return {
-        ...state
-      };
-    }
-  } else {
-    return {
-      ...state
-    };
+  return {
+    ...state,
+    selectedTags: [...state.selectedTags, selectedTag]
   }
 };
 
-const removeTageFromList = (state, tag) => {
-  let tags = [...state.tags.slice(0, tag), ...state.tags.slice(tag + 1)];
+const removeTagFromSelected = (state, selectedTag) => {
+  let newSelectedTags = state.selectedTags.filter(tag => tag !== selectedTag);
+
   return {
     ...state,
-    tags: tags
-  };
+    selectedTags: newSelectedTags
+  }
 };
 
-const findVariableTags = (state, cards) => {
-  let newArr = [];
-  cards.filter(card => {
-    for (let params of card.params) {
-      if (newArr.findIndex(currentValue => currentValue == params) == -1)
-        newArr.push(params);
+const findVariableTags = (state, studios) => {
+  let newVariableTags = [];
+  studios.forEach(({params}) => {
+    for (let tag of params) {
+      if (newVariableTags.find(addedTag => addedTag === tag) === undefined)
+        newVariableTags.push(tag);
     }
   });
+  
   return {
     ...state,
-    variableTags: newArr
+    variableTags: newVariableTags
   };
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_CARDS_SUCCESS":
+    case "FETCH_STUDIOS_SUCCESS":
       return {
         ...state,
-        cards: action.payload,
-        loading: false
+        studios: action.payload,
+        studiosLoading: false
       };
-    case "CHANGE_RANGE_FILTER":
+    case "CHANGE_PRICE_FILTER_SELECTED_RANGE_VALUE":
       return {
         ...state,
-        selectedPriceRange: {
+        selectedPriceFilterRange: {
           min: action.payload.min,
           max: action.payload.max
         }
       };
-    case "SET_CURRENT_RANGE_VALUE":
+    case "SET_CURRENT_PRICE_FILTER_RANGE_VALUE":
       return {
         ...state,
-        selectedPriceRange: action.payload
+        selectedPriceFilterRange: action.payload
       };
 
-    case "SET_DEFAULT_RANGE_VALUE":
+    case "SET_DEFAULT_PRICE_FILTER_RANGE_VALUE":
       return {
         ...state,
-        defaultPriceRange: {
+        defaultPriceFilterRange: {
           min: action.payload.min,
           max: action.payload.max
         }
       };
-    case "FIND_SEARCH_TAGS": // добавить актуальный тэги в стор
+    case "FIND_SEARCHING_TAGS": 
       return findVariableTags(state, action.payload);
     case "TAG_ADDED_TO_TAGLIST":
-      return addTagToList(state, action.payload);
+      return addTagToSelected(state, action.payload);
     case "TAG_REMOVED_FROM_TAGLIST":
-      return removeTageFromList(state, action.payload);
-    case "CHANGE_TERM":
+      return removeTagFromSelected(state, action.payload);
+    case "SMART_SEARCH_PANEL_VALUE_CHANGED":
       return {
         ...state,
-        term: action.payload
+        smartSeachPanelValue: action.payload
       };
-
     default:
       return state;
   }
