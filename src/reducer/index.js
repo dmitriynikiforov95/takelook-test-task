@@ -3,7 +3,6 @@ const initialState = {
   isStudiosLoaded: null,
   isPriceFilterRangeValueLoaded: null,
   selectedTags: ["камин"],
-  variableTags: [],
   smartSeachPanelValue: "",
   currentPriceFilterRangeValue: [],
 };
