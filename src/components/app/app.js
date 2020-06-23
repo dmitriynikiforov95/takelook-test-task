@@ -5,22 +5,21 @@ import StudioListContainer from "../../containers/studio-list-container";
 import PriceFilterContainer from "../../containers/price-filter-container";
 
 import logo from "../../img/logo.png";
-import "antd/dist/antd.css"
+import "antd/dist/antd.css";
+import "./normalize.css";
 import "./app.css";
 
 const App = () => {
   return (
     <div className="app-container">
       <div className="app-logo-wrapper">
-        <img className="app-logo" src={logo} alt="лого" />
+        <img className="app-logo" src={logo} width="191" height="59" alt="лого" />
       </div>
       <div className="app-components-wrapper">
-        <div className="card-list-wrapper">
           <StudioListContainer />
-        </div>
         <div className="sort-settings-wrapper">
-          <SmartSearchPanelContainer />
           <PriceFilterContainer />
+          <SmartSearchPanelContainer />
         </div>
       </div>
     </div>

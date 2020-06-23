@@ -1,35 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { addTagToSelected, changeSmartSearchPanelValue, findSearchingTags } from "../../actions";
+import { addTagToSelected, changeSmartSearchPanelValue } from "../../actions";
 import SmartSearchPanel from "../../components/smart-search-panel";
 
-const SmartSearchPanelContainer = ({studios, findSearchingTags, ...otherProps}) => {
+const SmartSearchPanelContainer = ({ studios, ...propsForDumb }) => {
+
+  const [variableTags, setVariableTags] = useState([]);
+
+  const findVariableTags = (studios) => {
+    const newVariableTags = [];
+    studios.forEach(({ params }) => {
+      for (let tag of params) {
+        if (newVariableTags.find((addedTag) => addedTag === tag)) continue;
+        newVariableTags.push(tag);
+      }
+    });
+
+    setVariableTags(newVariableTags);
+  };
 
   useEffect(
     () => {
-      findSearchingTags(studios)
+      findVariableTags(studios);
     }, [studios]
   )
 
   return (
-  <SmartSearchPanel {...otherProps}/>
+    <SmartSearchPanel variableTags={variableTags} {...propsForDumb} />
   );
-
+  
 }
 
-const mapStateToProps = ({ smartSeachPanelValue, studios, variableTags }) => {
+const mapStateToProps = ({ smartSeachPanelValue, studios }) => {
   return {
     smartSeachPanelValue,
     studios,
-    variableTags
   };
 };
 
 const mapDispatchToProps = {
   addTagToSelected,
   changeSmartSearchPanelValue,
-  findSearchingTags
 };
 
 export default connect(

@@ -7,7 +7,14 @@ const studiosLoaded = studios => {
   };
 };
 
-const fetchStudios = (dispatch, takelookService) => () => {
+const fetchStudiosRequest = () => {
+  return {
+    type: "FETCH_STUDIOUS_REQUEST",
+  }
+};
+
+const fetchStudios = (dispatch) => (takelookService) => {
+ dispatch(fetchStudiosRequest())
   takelookService
     .getStudios()
     .then(res => {
@@ -16,9 +23,9 @@ const fetchStudios = (dispatch, takelookService) => () => {
     })
 };
 
-const changePriceFilterRangeValue = ([min, max]) => {
+const setCurrentPriceFilterRangeValue = ([min, max]) => {
   return {
-    type: "CHANGE_PRICE_FILTER_SELECTED_RANGE_VALUE",
+    type: "CURRENT_PRICE_FILTER_RANGE_VALUE_SETTED",
     payload: {
       min,
       max
@@ -40,13 +47,6 @@ const removeTagFromSelected = tag => {
   };
 };
 
-const findSearchingTags = studios => {
-  return {
-    type: "FIND_SEARCHING_TAGS",
-    payload: studios
-  };
-};
-
 const changeSmartSearchPanelValue = term => {
   return {
     type: "SMART_SEARCH_PANEL_VALUE_CHANGED",
@@ -54,33 +54,10 @@ const changeSmartSearchPanelValue = term => {
   };
 };
 
-const setCurrentPriceFilterRangeValue = (min, max) => {
-  return {
-    type: "SET_CURRENT_PRICE_FILTER_RANGE_VALUE",
-    payload: {
-      min,
-      max
-    }
-  };
-};
-
-const setDefaultPriceFilterRangeValue = (min, max) => {
-  return {
-    type: "SET_DEFAULT_PRICE_FILTER_RANGE_VALUE",
-    payload: {
-      min,
-      max
-    }
-  };
-};
-
 export {
-  changePriceFilterRangeValue,
   setCurrentPriceFilterRangeValue,
-  setDefaultPriceFilterRangeValue,
   addTagToSelected,
   removeTagFromSelected,
-  findSearchingTags,
   changeSmartSearchPanelValue,
   fetchStudios
 };

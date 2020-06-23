@@ -1,10 +1,18 @@
+// import {
+//     TakeLookServiceProvider,
+//     TakeLookServiceConsumer
+// } from './takelook-service-context.js';
+
+// export {
+//     TakeLookServiceProvider,
+//     TakeLookServiceConsumer
+// }
+
 import {
-    TakeLookServiceProvider,
-    TakeLookServiceConsumer
+    TakeLookServiceContext
 } from './takelook-service-context.js';
 
 export {
-    TakeLookServiceProvider,
-    TakeLookServiceConsumer
+    TakeLookServiceContext
 }
 

@@ -10,7 +10,10 @@ const SmartSearchPanel = ({ variableTags, smartSeachPanelValue, changeSmartSearc
 
   return (
     <div>
-      <Popover placement="topLeft" content={"Выберите тег из выпадающего списка"}>
+      <Popover
+        placement="topLeft"
+        content={"Выберите тег из выпадающего списка"}
+      >
         <AutoComplete
           className="smart-search-panel"
           placeholder="Поиск по тегам и названиям"
@@ -25,12 +28,7 @@ const SmartSearchPanel = ({ variableTags, smartSeachPanelValue, changeSmartSearc
           }
         >
           <Input
-            suffix={
-              <Icon
-                type="search"
-                className="certain-category-icon"
-              />
-            }
+            suffix={<Icon type="search" className="certain-category-icon" />}
           />
         </AutoComplete>
       </Popover>

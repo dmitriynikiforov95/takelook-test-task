@@ -1,12 +1,7 @@
 import React from 'react';
 
-const {
-    Provider: TakeLookServiceProvider,
-    Consumer: TakeLookServiceConsumer
-} = React.createContext();
+const TakeLookServiceContext = React.createContext();
 
 export {
-    TakeLookServiceProvider,
-    TakeLookServiceConsumer
+    TakeLookServiceContext
 }
-

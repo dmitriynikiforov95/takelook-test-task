@@ -1,82 +1,89 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { connect } from "react-redux";
 
-import { withTakeLookService } from "../../components/hoc";
 import { fetchStudios } from "../../actions";
-
-import Spinner from "../../components/spinner";
 
 import StudioList from "../../components/studio-list";
 
-const StudioListContainer = ({ loading, fetchStudios, studios }) => {
+import { TakeLookServiceContext } from "../../components/takelook-service-context";
+import SearchResultHint from "./../../components/search-result-hint/index";
 
-  useEffect(
-    fetchStudios, []
-  )
+const StudioListContainer = ({ isStudiosLoaded, fetchStudios, studios, isPriceFilterRangeValueLoaded }) => {
+  const takeLookData = useContext(TakeLookServiceContext);
 
-  if (loading) {
-    return <Spinner />;
+  useEffect(() => fetchStudios(takeLookData), [fetchStudios, takeLookData]);
+
+  if (isPriceFilterRangeValueLoaded && studios.length === 0) {
+    return <SearchResultHint />;
   }
-  return (
-    <StudioList studios={studios}/>
-  );
 
-}
+  return <StudioList studios={studios} />;
+};
 
+const filterStudios = (
+  studios,
+  currentPriceFilterRangeValue,
+  smartSeachPanelValue,
+  selectedTags
+) => {
+  const { min, max } = currentPriceFilterRangeValue;
 
-const filterStudios = (studios, selectedPriceFilterRange, smartSeachPanelValue, selectedTags) => {
-
-  
-  const searchBySmartSeachPanelValue = (studios, smartSeachPanelValue) => {
-    return smartSeachPanelValue.length === 0
+  let newStudios =
+    smartSeachPanelValue.length === 0
       ? studios
-      : studios.filter(
-        ({name}) => name.toLowerCase().indexOf(smartSeachPanelValue.toLowerCase()) > -1
-      );
-  };
+      : studios.filter(({ params, name }) => {
+          const searchValue = smartSeachPanelValue.toLowerCase();
+          for (let studioTag of params) {
+            if (
+              studioTag.toLowerCase().includes(searchValue) ||
+              name.toLowerCase().includes(searchValue)
+            ) {
+              return true;
+            }
+          }
+          return false;
+        });
 
-  // фильтрация по значению в поисковой строке и по стоимости
-  let newStudios = searchBySmartSeachPanelValue(studios, smartSeachPanelValue)
-    .filter(
-      ({price}) =>
-        price >= selectedPriceFilterRange.min &&
-        price <= selectedPriceFilterRange.max
-    );
-
-  // фильтрация по выбранным тегам
-  return selectedTags.length === 0
-    ? newStudios
-    : newStudios.filter(({params}) => {
+  if (selectedTags.length) {
+    newStudios = newStudios.filter(({ params }) => {
       for (let studioTag of params) {
-        if (selectedTags.find(selectedTag => selectedTag === studioTag)) {
+        if (selectedTags.find((selectedTag) => selectedTag === studioTag)) {
           return true;
         }
       }
+      return false;
     });
+  }
+  return newStudios.filter(({ price }) => price >= min && price <= max);
 };
 
 const mapStateToProps = ({
   studios,
-  loading,
-  selectedPriceFilterRange,
+  isPriceFilterRangeValueLoaded,
+  isStudiosLoaded,
+  currentPriceFilterRangeValue,
   smartSeachPanelValue,
-  selectedTags
+  selectedTags,
 }) => {
   return {
-    studios: filterStudios(studios, selectedPriceFilterRange, smartSeachPanelValue, selectedTags),
-    loading
+    studios: filterStudios(
+      studios,
+      currentPriceFilterRangeValue,
+      smartSeachPanelValue,
+      selectedTags
+    ),
+    isStudiosLoaded,
+    isPriceFilterRangeValueLoaded,
   };
 };
 
-const mapDispatchToProps = (dispatch, { takelookService }) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    fetchStudios: fetchStudios(dispatch, takelookService)
-  }
+    fetchStudios: fetchStudios(dispatch),
+  };
 };
 
-export default withTakeLookService(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(StudioListContainer)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StudioListContainer);

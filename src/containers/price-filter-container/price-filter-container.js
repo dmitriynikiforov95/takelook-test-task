@@ -1,62 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import {
-  changePriceFilterRangeValue,
   setCurrentPriceFilterRangeValue,
-  setDefaultPriceFilterRangeValue
-} from "../../actions";
+} from "../../actions"
 
 import PriceFilter from "../../components/price-filter";
 
-const PriceFilterContainer = ({ studios, setDefaultPriceFilterRangeValue, setCurrentPriceFilterRangeValue, ...otherProps }) => {
+const PriceFilterContainer = ({
+  studios,
+  setCurrentPriceFilterRangeValue,
+  currentPriceFilterRangeValue,
+}) => {
+  const [defaultPriceFilterRangeValue, setDefaultPriceFilterRangeValue] = useState({
+    min: null,
+    max: null,
+  });
 
-  useEffect(
-    () => {
-      if (studios.length > 0) {
+  useEffect(() => {
+    if (studios.length) {
+      const studiosCopy = studios.slice().sort((a, b) => a.price - b.price);
 
-        let minPrice, maxPrice = studios[0].price;
-      
-        for (let {price} of studios) {
-          if (minPrice < price) {
-            continue;
-          }
-           else {
-            minPrice = price;
-          }
-        }
-
-        for (let {price} of studios) {
-          if (maxPrice < price) {
-            maxPrice = price;
-          }
-        }
-
-        setDefaultPriceFilterRangeValue(minPrice, maxPrice);
-        setCurrentPriceFilterRangeValue(minPrice, maxPrice);
-      }
-
-    }, [studios]
-
-  )
+      const min = studiosCopy[0].price,
+        max = studiosCopy[studiosCopy.length - 1].price;
+       
+      setDefaultPriceFilterRangeValue({ min, max });
+      setCurrentPriceFilterRangeValue([min, max]);
+    }
+  }, [studios,setCurrentPriceFilterRangeValue]);
 
   return (
-    <PriceFilter {...otherProps} />
+    <PriceFilter
+      setCurrentPriceFilterRangeValue={setCurrentPriceFilterRangeValue}
+      currentPriceFilterRangeValue={currentPriceFilterRangeValue}
+      defaultPriceFilterRangeValue={defaultPriceFilterRangeValue}
+    />
   );
-}
+};
 
-const mapStateToProps = ({ studios, defaultPriceFilterRange, selectedPriceFilterRange }) => {
+const mapStateToProps = ({ studios, currentPriceFilterRangeValue }) => {
   return {
-    defaultPriceFilterRange,
-    selectedPriceFilterRange,
-    studios
+    currentPriceFilterRangeValue,
+    studios,
   };
 };
 
 const mapDispatchToProps = {
-    changePriceFilterRangeValue,
-    setCurrentPriceFilterRangeValue,
-    setDefaultPriceFilterRangeValue,
+  setCurrentPriceFilterRangeValue,
 };
 
 export default connect(

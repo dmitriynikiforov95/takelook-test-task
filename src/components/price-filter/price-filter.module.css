@@ -3,21 +3,21 @@
     width: 200px;
 }
 
-.filter-wrapper {
-    margin-top:20px;
+.container {
+    margin-bottom:20px;
     padding: 5px 15px;
     border: 1px solid #d9d9d9;
 }
 
-.filter-info-wrapper {
+.details {
     display: flex;
     justify-content: space-between;
 }
 
-.price-left {
+.priceToMin {
     padding-right: 5px;
 }
 
-.price-right {
+.priceToMax {
     padding-left: 5px;
 }

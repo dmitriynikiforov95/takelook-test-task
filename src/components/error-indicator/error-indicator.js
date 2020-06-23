@@ -1,12 +1,12 @@
 import React from "react";
-import "./error-indicator.css";
+import s from "./error-indicator.module.css";
 
 const ErrorIndicator = () => {
   return (
-    <div className="error-indicator-wrapper">
-      <div className="error-message-wrapper">
-        <div className="error-message-title">Ошибка</div>
-        <div>Билеты не загружены <br/> Перезагрузите страницу!</div>
+    <div className={s.container}>
+      <div className={s.messageWrapper}>
+        <div className={s.title}>Ошибка</div>
+        <div>Студии не загружены <br/> Перезагрузите страницу!</div>
       </div>
     </div>
   );

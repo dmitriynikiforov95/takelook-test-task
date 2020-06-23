@@ -2,20 +2,20 @@ import React from "react";
 
 import StudioListItem from "../studio-list-item";
 
-import "./studio-list.css";
+import s from "./studio-list.module.css";
 
-const StudioList = ({studios}) => {
+const StudioList = ({ studios }) => {
+
   return (
-    <ul className="card-list">
-      {studios.map((studio, idx) => {
+    <ul className={s.list}>
+      {studios.map((studio) => {
         return (
-          <li key={idx} className="card-list__item">
+          <li key={studio.id} className={s.item}>
             <StudioListItem studio={studio} />
           </li>
         );
       })}
     </ul>
   );
-}
+};
 export default StudioList;
-

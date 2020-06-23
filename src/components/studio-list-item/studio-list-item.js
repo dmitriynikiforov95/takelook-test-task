@@ -1,34 +1,36 @@
 import React from "react";
 
-import { Card as AntdCard } from "antd";
+import { Card } from "antd";
 
-import "./studio-list-item.css";
+import s from "./studio-list-item.module.css";
 
-const { Meta } = AntdCard;
+const { Meta } = Card;
 
 const StudioListItem = ({ studio }) => {
 
   const { name, view, price, params } = studio;
 
   const comma = ",";
- 
-  const tag = params.length === 0 ? "теги отсутствуют" : "теги:";
+
+  const tagsInfo = params.length === 0 ? "теги отсутствуют" : "теги:";
 
   return (
-    <AntdCard className="card-list-item" cover={<img alt={name} src={view} />}>
-    <Meta title={name} />
-    <div className="card-list-item__price">{`${price} р.`}</div>
-    <ul className="card-list-item__tag-list">
-      <span className="span">{tag}</span>
-      {params.map(i => (
-        <li className="card-list-item__tag-list-item">
-          {"#"}
-          {i}
-          <span class="card-list-item__tag-list-item-comma">{comma}</span>
-        </li>
-      ))}
-    </ul>
-  </AntdCard>
+    <Card
+      bodyStyle={{ padding: "12px", flexGrow: 1 }}
+      cover={<img alt={name} src={view} width="240" height="185" />}>
+      <Meta title={name} />
+      <div className={s.price}>{`${price} р`}</div>
+      <ul className={s.tagList}>
+        <span className={s.tagsInfo}>{tagsInfo}</span>
+        {params.map((tag, idx) => (
+          <li className={s.tagListItem} key={idx}>
+            {"#"}
+            {tag}
+            <span className={s.tagListComma}>{comma}</span>
+          </li>
+        ))}
+      </ul>
+    </Card>
   );
 };
 

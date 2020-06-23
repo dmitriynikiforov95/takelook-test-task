@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    padding: 0;
+    padding: 0
 }
 
 img {
@@ -23,19 +23,21 @@ html {
 }
 
 .app-container {
-    max-width: 1060px;
+    width: 1060px;
+    padding: 0 20px;
     margin: 0 auto;
     margin-top: 30px;
 }
 
 .app-logo-wrapper {
-    text-align: center;
+    margin: 0 auto;
+    width: 191px;
+    height: 59px;
 }
 
 .app-components-wrapper {
     display: flex;
     justify-content: space-between;
-    width: 1060px;
     margin-top: 30px;
 }
 
@@ -44,5 +46,5 @@ html {
 }
 
 .sort-settings-wrapper {
-    width: 240px;
+   width: 240px;
 }
