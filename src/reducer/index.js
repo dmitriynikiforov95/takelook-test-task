@@ -7,13 +7,11 @@ const initialState = {
   currentPriceFilterRangeValue: [],
 };
 
-const addTagToSelected = (selectedTags, selectedTag) => {
-  if (selectedTags.find((tag) => tag === selectedTag)) {
-    return selectedTags;
-  }
-  return [...selectedTags, selectedTag];
-};
-
+const addTagToSelected = (selectedTags, selectedTag) =>
+  selectedTags.find((tag) => tag === selectedTag)
+    ? selectedTags
+    : [...selectedTags, selectedTag];
+  
 const removeTagFromSelected = (selectedTags, selectedTag) =>
   selectedTags.filter((tag) => tag !== selectedTag);
 

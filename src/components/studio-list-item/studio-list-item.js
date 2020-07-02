@@ -16,6 +16,7 @@ const StudioListItem = ({ studio }) => {
 
   return (
     <Card
+      style={{width: "240px"}}
       bodyStyle={{ padding: "12px", flexGrow: 1 }}
       cover={<img alt={name} src={view} width="240" height="185" />}>
       <Meta title={name} />

@@ -7,8 +7,12 @@
     "antd": "^3.25.0",
     "rc-tween-one": "^2.7.2",
     "react": "^16.11.0",
+    "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "react-redux": "^7.2.0",
+    "react-scripts": "3.2.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,12 +29,14 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "ie >= 9"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "ie 11"
     ]
   },
   "devDependencies": {
