@@ -25,28 +25,26 @@ const StudioListContainer = ({
 };
 
 const filterStudiosBySearchingValue = (studios, smartSeachPanelValue) =>
-  (smartSeachPanelValue.trim().length === 0)
+ (smartSeachPanelValue.trim().length === 0)
     ? studios
     : studios.filter(({ params, name }) => {
-      const searchValue = smartSeachPanelValue.trim().toLowerCase();
-      for (let studioTag of params) {
-        if (
-          studioTag.toLowerCase().includes(searchValue) ||
-          name.toLowerCase().includes(searchValue)
-        ) {
-          return true;
+        const searchingValue = smartSeachPanelValue.trim().toLowerCase();
+        for (let studioTag of params) {
+          if (
+            studioTag.toLowerCase().includes(searchingValue) ||
+            name.toLowerCase().includes(searchingValue)
+          )
+            return true;
         }
-      }
-      return false;
-    });
+        return false;
+      });
 
-const filterStudiosByTags = (studios, selectedTags) => 
-  (selectedTags.length)
+const filterStudiosByTags = (studios, selectedTags) =>
+ (selectedTags.length)
     ? studios.filter(({ params }) => {
         for (let studioTag of params) {
-          if (selectedTags.find((selectedTag) => selectedTag === studioTag)) {
+          if (selectedTags.find((selectedTag) => selectedTag === studioTag))
             return true;
-          }
         }
         return false;
       })
