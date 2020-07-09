@@ -3,9 +3,7 @@ import { TweenOneGroup } from 'rc-tween-one';
 import { Tag } from "antd";
 import s from "./tag-list.module.css";
 
-const TagList = ({ selectedTags, removeTagFromSelected }) => {
-
-  return (
+const TagList = ({ selectedTags, removeTagFromSelected }) => (
     <>
         <TweenOneGroup
           enter={{
@@ -37,6 +35,5 @@ const TagList = ({ selectedTags, removeTagFromSelected }) => {
         </TweenOneGroup>
     </>
   );
-};
 
 export default TagList;

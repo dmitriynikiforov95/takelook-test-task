@@ -5,7 +5,6 @@ import { addTagToSelected, changeSmartSearchPanelValue } from "../../actions";
 import SmartSearchPanel from "../../components/smart-search-panel";
 
 const SmartSearchPanelContainer = ({ studios, ...propsForDumb }) => {
-
   const [variableTags, setVariableTags] = useState([]);
 
   const findVariableTags = (studios) => {
@@ -20,24 +19,17 @@ const SmartSearchPanelContainer = ({ studios, ...propsForDumb }) => {
     setVariableTags(newVariableTags);
   };
 
-  useEffect(
-    () => {
-      findVariableTags(studios);
-    }, [studios]
-  )
+  useEffect(() => {
+    findVariableTags(studios);
+  }, [studios]);
 
-  return (
-    <SmartSearchPanel variableTags={variableTags} {...propsForDumb} />
-  );
-  
-}
-
-const mapStateToProps = ({ smartSeachPanelValue, studios }) => {
-  return {
-    smartSeachPanelValue,
-    studios,
-  };
+  return <SmartSearchPanel variableTags={variableTags} {...propsForDumb} />;
 };
+
+const mapStateToProps = ({ smartSeachPanelValue, studios }) => ({
+  smartSeachPanelValue,
+  studios,
+});
 
 const mapDispatchToProps = {
   addTagToSelected,

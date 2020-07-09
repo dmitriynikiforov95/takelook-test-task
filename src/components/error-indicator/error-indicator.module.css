@@ -1,25 +1,24 @@
-.container{
-    width: 502px;
-    min-height: 184px;
-    margin: 50% auto;
-    padding: 20px 20px;
-    padding-top:26px;
-    background: rgb(255, 255, 255);
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-} 
+.container {
+  width: 502px;
+  min-height: 184px;
+  margin: 50% auto;
+  padding: 20px 20px;
+  padding-top: 26px;
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
 
 .messageWrapper {
-    width:300px;
-    margin: 0 auto;
-    margin-top:20px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 21px;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
 }
 
-.error-message-title{
-    color: #f00;
+.header {
+  color: #f00;
 }
-

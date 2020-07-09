@@ -1,52 +1,48 @@
 @import-normalize;
 
 body {
-    margin: 0;
-    padding: 0
+  margin: 0;
+  padding: 0;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 html {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
 *:before,
 *:after {
-    -webkit-box-sizing: inherit;
-    -moz-box-sizing: inherit;
-    box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 .app-container {
-    width: 1060px;
-    padding: 0 20px;
-    margin: 0 auto;
-    margin-top: 30px;
+  width: 1060px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 0 20px;
 }
 
 .app-logo-wrapper {
-    margin: 0 auto;
-    width: 191px;
-    height: 59px;
+  width: 191px;
+  height: 59px;
+  margin: 0 auto;
 }
 
-.app-components-wrapper {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
+.app-components-flex-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
 }
 
-.card-list-wrapper {
-    width: 760px;
-}
-
-.sort-settings-wrapper {
-   width: 240px;
+.studio-list-settings-components-wrapper {
+  width: 240px;
 }

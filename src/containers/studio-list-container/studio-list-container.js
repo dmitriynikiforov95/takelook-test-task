@@ -8,7 +8,7 @@ import StudioList from "../../components/studio-list";
 import { TakeLookServiceContext } from "../../components/takelook-service-context";
 import SearchResultHint from "./../../components/search-result-hint/index";
 
-const StudioListContainer = ({ isStudiosLoaded, fetchStudios, studios, isPriceFilterRangeValueLoaded }) => {
+const StudioListContainer = ({ fetchStudios, studios, isPriceFilterRangeValueLoaded }) => {
   const takeLookData = useContext(TakeLookServiceContext);
 
   useEffect(() => fetchStudios(takeLookData), [fetchStudios, takeLookData]);
@@ -60,28 +60,22 @@ const filterStudios = (
 const mapStateToProps = ({
   studios,
   isPriceFilterRangeValueLoaded,
-  isStudiosLoaded,
   currentPriceFilterRangeValue,
   smartSeachPanelValue,
   selectedTags,
-}) => {
-  return {
-    studios: filterStudios(
-      studios,
-      currentPriceFilterRangeValue,
-      smartSeachPanelValue,
-      selectedTags
-    ),
-    isStudiosLoaded,
-    isPriceFilterRangeValueLoaded,
-  };
-};
+}) => ({
+  studios: filterStudios(
+    studios,
+    currentPriceFilterRangeValue,
+    smartSeachPanelValue,
+    selectedTags
+  ),
+  isPriceFilterRangeValueLoaded,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchStudios: fetchStudios(dispatch),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  fetchStudios: fetchStudios(dispatch),
+})
 
 export default connect(
   mapStateToProps,

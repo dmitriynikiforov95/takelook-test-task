@@ -6,37 +6,32 @@ import "./smart-search-panel.css";
 
 import TagListContainer from "../../containers/tag-list-container";
 
-const SmartSearchPanel = ({ variableTags, smartSeachPanelValue, changeSmartSearchPanelValue, addTagToSelected }) => {
-
-  return (
-    <div>
-      <Popover
-        placement="topLeft"
-        content={"Выберите тег из выпадающего списка"}
+const SmartSearchPanel = ({
+  variableTags,
+  smartSeachPanelValue,
+  changeSmartSearchPanelValue,
+  addTagToSelected,
+}) => (
+  <>
+    <Popover placement="topLeft" content={"Выберите тег из выпадающего списка"}>
+      <AutoComplete
+        className="smart-search-panel"
+        placeholder="Поиск по тегам и названиям"
+        onSearch={changeSmartSearchPanelValue}
+        onSelect={addTagToSelected}
+        value={smartSeachPanelValue}
+        dataSource={variableTags}
+        filterOption={(inputValue, option) =>
+          option.props.children.toUpperCase().includes(inputValue.toUpperCase())
+        }
       >
-        <AutoComplete
-          className="smart-search-panel"
-          placeholder="Поиск по тегам и названиям"
-          onSearch={(e) => changeSmartSearchPanelValue(e)}
-          onSelect={(e) => addTagToSelected(e)}
-          value={smartSeachPanelValue}
-          dataSource={variableTags}
-          filterOption={(inputValue, option) =>
-            option.props.children
-              .toUpperCase()
-              .indexOf(inputValue.toUpperCase()) !== -1
-          }
-        >
-          <Input
-            suffix={<Icon type="search" className="certain-category-icon" />}
-          />
-        </AutoComplete>
-      </Popover>
-      <div>
-        <TagListContainer />
-      </div>
-    </div>
-  );
-}
+        <Input
+          suffix={<Icon type="search" className="certain-category-icon" />}
+        />
+      </AutoComplete>
+    </Popover>
+    <TagListContainer />
+  </>
+);
 
 export default SmartSearchPanel;

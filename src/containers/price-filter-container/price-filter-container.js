@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import {
-  setCurrentPriceFilterRangeValue,
-} from "../../actions"
+import { setCurrentPriceFilterRangeValue } from "../../actions";
 
 import PriceFilter from "../../components/price-filter";
 
@@ -12,7 +10,10 @@ const PriceFilterContainer = ({
   setCurrentPriceFilterRangeValue,
   currentPriceFilterRangeValue,
 }) => {
-  const [defaultPriceFilterRangeValue, setDefaultPriceFilterRangeValue] = useState({
+  const [
+    defaultPriceFilterRangeValue,
+    setDefaultPriceFilterRangeValue,
+  ] = useState({
     min: null,
     max: null,
   });
@@ -23,11 +24,11 @@ const PriceFilterContainer = ({
 
       const min = studiosCopy[0].price,
         max = studiosCopy[studiosCopy.length - 1].price;
-       
+
       setDefaultPriceFilterRangeValue({ min, max });
       setCurrentPriceFilterRangeValue([min, max]);
     }
-  }, [studios,setCurrentPriceFilterRangeValue]);
+  }, [studios, setCurrentPriceFilterRangeValue]);
 
   return (
     <PriceFilter
@@ -38,12 +39,10 @@ const PriceFilterContainer = ({
   );
 };
 
-const mapStateToProps = ({ studios, currentPriceFilterRangeValue }) => {
-  return {
-    currentPriceFilterRangeValue,
-    studios,
-  };
-};
+const mapStateToProps = ({ studios, currentPriceFilterRangeValue }) => ({
+  currentPriceFilterRangeValue,
+  studios,
+});
 
 const mapDispatchToProps = {
   setCurrentPriceFilterRangeValue,

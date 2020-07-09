@@ -11,17 +11,17 @@ const addTagToSelected = (selectedTags, selectedTag) =>
   selectedTags.find((tag) => tag === selectedTag)
     ? selectedTags
     : [...selectedTags, selectedTag];
-  
+
 const removeTagFromSelected = (selectedTags, selectedTag) =>
   selectedTags.filter((tag) => tag !== selectedTag);
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_STUDIOUS_REQUEST": 
-    return {
-      ...state,
-      isStudiosLoaded: false,
-    }
+    case "FETCH_STUDIOUS_REQUEST":
+      return {
+        ...state,
+        isStudiosLoaded: false,
+      };
     case "FETCH_STUDIOS_SUCCESS":
       return {
         ...state,
@@ -36,7 +36,7 @@ const reducer = (state = initialState, action) => {
           max: action.payload.max,
         },
         isPriceFilterRangeValueLoaded: true,
-      }
+      };
     case "TAG_ADDED_TO_TAGLIST":
       return {
         ...state,

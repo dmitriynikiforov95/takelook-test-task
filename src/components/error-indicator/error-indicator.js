@@ -5,7 +5,7 @@ const ErrorIndicator = () => {
   return (
     <div className={s.container}>
       <div className={s.messageWrapper}>
-        <div className={s.title}>Ошибка</div>
+        <div className={s.header}>Ошибка</div>
         <div>Студии не загружены <br/> Перезагрузите страницу!</div>
       </div>
     </div>
