@@ -8,7 +8,11 @@ import StudioList from "../../components/studio-list";
 import { TakeLookServiceContext } from "../../components/takelook-service-context";
 import SearchResultHint from "./../../components/search-result-hint/index";
 
-const StudioListContainer = ({ fetchStudios, studios, isPriceFilterRangeValueLoaded }) => {
+const StudioListContainer = ({
+  fetchStudios,
+  studios,
+  isPriceFilterRangeValueLoaded,
+}) => {
   const takeLookData = useContext(TakeLookServiceContext);
 
   useEffect(() => fetchStudios(takeLookData), [fetchStudios, takeLookData]);
@@ -20,42 +24,36 @@ const StudioListContainer = ({ fetchStudios, studios, isPriceFilterRangeValueLoa
   return <StudioList studios={studios} />;
 };
 
-const filterStudios = (
-  studios,
-  currentPriceFilterRangeValue,
-  smartSeachPanelValue,
-  selectedTags
-) => {
-  const { min, max } = currentPriceFilterRangeValue;
-
-  let newStudios =
-    smartSeachPanelValue.length === 0
-      ? studios
-      : studios.filter(({ params, name }) => {
-          const searchValue = smartSeachPanelValue.toLowerCase();
-          for (let studioTag of params) {
-            if (
-              studioTag.toLowerCase().includes(searchValue) ||
-              name.toLowerCase().includes(searchValue)
-            ) {
-              return true;
-            }
-          }
-          return false;
-        });
-
-  if (selectedTags.length) {
-    newStudios = newStudios.filter(({ params }) => {
+const filterStudiosBySearchingValue = (studios, smartSeachPanelValue) =>
+  (smartSeachPanelValue.trim().length === 0)
+    ? studios
+    : studios.filter(({ params, name }) => {
+      const searchValue = smartSeachPanelValue.trim().toLowerCase();
       for (let studioTag of params) {
-        if (selectedTags.find((selectedTag) => selectedTag === studioTag)) {
+        if (
+          studioTag.toLowerCase().includes(searchValue) ||
+          name.toLowerCase().includes(searchValue)
+        ) {
           return true;
         }
       }
       return false;
     });
-  }
-  return newStudios.filter(({ price }) => price >= min && price <= max);
-};
+
+const filterStudiosByTags = (studios, selectedTags) => 
+  (selectedTags.length)
+    ? studios.filter(({ params }) => {
+        for (let studioTag of params) {
+          if (selectedTags.find((selectedTag) => selectedTag === studioTag)) {
+            return true;
+          }
+        }
+        return false;
+      })
+    : studios;
+
+const filterStudiosByPrice = (studios, { min, max }) =>
+  studios.filter(({ price }) => price >= min && price <= max);
 
 const mapStateToProps = ({
   studios,
@@ -64,18 +62,19 @@ const mapStateToProps = ({
   smartSeachPanelValue,
   selectedTags,
 }) => ({
-  studios: filterStudios(
-    studios,
-    currentPriceFilterRangeValue,
-    smartSeachPanelValue,
-    selectedTags
+  studios: filterStudiosBySearchingValue(
+    filterStudiosByTags(
+      filterStudiosByPrice(studios, currentPriceFilterRangeValue),
+      selectedTags
+    ),
+    smartSeachPanelValue
   ),
   isPriceFilterRangeValueLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchStudios: fetchStudios(dispatch),
-})
+});
 
 export default connect(
   mapStateToProps,
