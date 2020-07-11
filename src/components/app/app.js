@@ -1,9 +1,7 @@
 import React from "react";
-
 import SmartSearchPanelContainer from "../../containers/smart-search-panel-container";
 import StudioListContainer from "../../containers/studio-list-container";
 import PriceFilterContainer from "../../containers/price-filter-container";
-
 import logo from "../../img/logo.png";
 import "antd/dist/antd.css";
 import "./app.css";

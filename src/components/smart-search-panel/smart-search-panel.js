@@ -1,10 +1,7 @@
 import React from "react";
-
 import { Icon, Input, AutoComplete, Popover } from "antd";
-
-import "./smart-search-panel.css";
-
 import TagListContainer from "../../containers/tag-list-container";
+import "./smart-search-panel.css";
 
 const SmartSearchPanel = ({
   variableTags,

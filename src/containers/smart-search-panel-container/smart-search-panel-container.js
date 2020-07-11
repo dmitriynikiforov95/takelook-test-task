@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
 import { addTagToSelected, changeSmartSearchPanelValue } from "../../actions";
 import SmartSearchPanel from "../../components/smart-search-panel";
 

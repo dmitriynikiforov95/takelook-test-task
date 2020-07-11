@@ -1,10 +1,8 @@
 import React, { useEffect, useContext } from "react";
 import { connect } from "react-redux";
-
+import { compose } from "redux";
 import { fetchStudios } from "../../actions";
-
 import StudioList from "../../components/studio-list";
-
 import { TakeLookServiceContext } from "../../components/takelook-service-context";
 import SearchResultHint from "./../../components/search-result-hint/index";
 
@@ -17,17 +15,16 @@ const StudioListContainer = ({
 
   useEffect(() => fetchStudios(takeLookData), [fetchStudios, takeLookData]);
 
-  if (isPriceFilterRangeValueLoaded && studios.length === 0) {
-    return <SearchResultHint />;
-  }
-
-  return <StudioList studios={studios} />;
+  return isPriceFilterRangeValueLoaded && studios.length === 0 ? (
+    <SearchResultHint />
+  ) : (
+    <StudioList studios={studios} />
+  );
 };
 
-const filterStudiosBySearchingValue = (studios, smartSeachPanelValue) =>
- (smartSeachPanelValue.trim().length === 0)
-    ? studios
-    : studios.filter(({ params, name }) => {
+const filterStudiosBySearchingValue = (smartSeachPanelValue) => (studios) =>
+  smartSeachPanelValue.trim().length
+    ? studios.filter(({ params, name }) => {
         const searchingValue = smartSeachPanelValue.trim().toLowerCase();
         for (let studioTag of params) {
           if (
@@ -37,10 +34,11 @@ const filterStudiosBySearchingValue = (studios, smartSeachPanelValue) =>
             return true;
         }
         return false;
-      });
+      })
+    : studios;
 
-const filterStudiosByTags = (studios, selectedTags) =>
- (selectedTags.length)
+const filterStudiosByTags = (selectedTags) => (studios) =>
+  selectedTags.length
     ? studios.filter(({ params }) => {
         for (let studioTag of params) {
           if (selectedTags.find((selectedTag) => selectedTag === studioTag))
@@ -50,7 +48,7 @@ const filterStudiosByTags = (studios, selectedTags) =>
       })
     : studios;
 
-const filterStudiosByPrice = (studios, { min, max }) =>
+const filterStudiosByPrice = ({ min, max }) => (studios) =>
   studios.filter(({ price }) => price >= min && price <= max);
 
 const mapStateToProps = ({
@@ -60,13 +58,11 @@ const mapStateToProps = ({
   smartSeachPanelValue,
   selectedTags,
 }) => ({
-  studios: filterStudiosBySearchingValue(
-    filterStudiosByTags(
-      filterStudiosByPrice(studios, currentPriceFilterRangeValue),
-      selectedTags
-    ),
-    smartSeachPanelValue
-  ),
+  studios: compose(
+    filterStudiosBySearchingValue(smartSeachPanelValue),
+    filterStudiosByTags(selectedTags),
+    filterStudiosByPrice(currentPriceFilterRangeValue)
+  )(studios),
   isPriceFilterRangeValueLoaded,
 });
 

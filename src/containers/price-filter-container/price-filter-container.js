@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
 import { setCurrentPriceFilterRangeValue } from "../../actions";
-
 import PriceFilter from "../../components/price-filter";
 
 const PriceFilterContainer = ({

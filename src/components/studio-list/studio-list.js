@@ -1,7 +1,5 @@
 import React from "react";
-
 import StudioListItem from "../studio-list-item";
-
 import s from "./studio-list.module.css";
 
 const StudioList = ({ studios }) => (

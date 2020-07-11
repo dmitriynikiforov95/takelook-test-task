@@ -1,7 +1,5 @@
 import React from "react";
-
 import { Card } from "antd";
-
 import s from "./studio-list-item.module.css";
 
 const { Meta } = Card;
