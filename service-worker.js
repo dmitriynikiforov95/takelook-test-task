@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/takelook-test-task-app/precache-manifest.74ce8951e4831d70fcbce5c693385842.js"
+  "/takelook-test-task-app/precache-manifest.1d135b3ac404da4dec611be4d2e0b7eb.js"
 );
 
 self.addEventListener('message', (event) => {

@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/takelook-test-task-app/static/css/main.ae729dd6.chunk.css",
-    "main.js": "/takelook-test-task-app/static/js/main.ebd76f43.chunk.js",
-    "main.js.map": "/takelook-test-task-app/static/js/main.ebd76f43.chunk.js.map",
+    "main.css": "/takelook-test-task-app/static/css/main.b4e0dcc7.chunk.css",
+    "main.js": "/takelook-test-task-app/static/js/main.34c60e3f.chunk.js",
+    "main.js.map": "/takelook-test-task-app/static/js/main.34c60e3f.chunk.js.map",
     "runtime-main.js": "/takelook-test-task-app/static/js/runtime-main.6679cfc1.js",
     "runtime-main.js.map": "/takelook-test-task-app/static/js/runtime-main.6679cfc1.js.map",
-    "static/css/2.802837ff.chunk.css": "/takelook-test-task-app/static/css/2.802837ff.chunk.css",
-    "static/js/2.220695bc.chunk.js": "/takelook-test-task-app/static/js/2.220695bc.chunk.js",
-    "static/js/2.220695bc.chunk.js.map": "/takelook-test-task-app/static/js/2.220695bc.chunk.js.map",
+    "static/css/2.48db8b0f.chunk.css": "/takelook-test-task-app/static/css/2.48db8b0f.chunk.css",
+    "static/js/2.59c56ba6.chunk.js": "/takelook-test-task-app/static/js/2.59c56ba6.chunk.js",
+    "static/js/2.59c56ba6.chunk.js.map": "/takelook-test-task-app/static/js/2.59c56ba6.chunk.js.map",
     "index.html": "/takelook-test-task-app/index.html",
-    "precache-manifest.74ce8951e4831d70fcbce5c693385842.js": "/takelook-test-task-app/precache-manifest.74ce8951e4831d70fcbce5c693385842.js",
+    "precache-manifest.1d135b3ac404da4dec611be4d2e0b7eb.js": "/takelook-test-task-app/precache-manifest.1d135b3ac404da4dec611be4d2e0b7eb.js",
     "service-worker.js": "/takelook-test-task-app/service-worker.js",
-    "static/css/2.802837ff.chunk.css.map": "/takelook-test-task-app/static/css/2.802837ff.chunk.css.map",
-    "static/css/main.ae729dd6.chunk.css.map": "/takelook-test-task-app/static/css/main.ae729dd6.chunk.css.map"
+    "static/css/2.48db8b0f.chunk.css.map": "/takelook-test-task-app/static/css/2.48db8b0f.chunk.css.map",
+    "static/css/main.b4e0dcc7.chunk.css.map": "/takelook-test-task-app/static/css/main.b4e0dcc7.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.6679cfc1.js",
-    "static/css/2.802837ff.chunk.css",
-    "static/js/2.220695bc.chunk.js",
-    "static/css/main.ae729dd6.chunk.css",
-    "static/js/main.ebd76f43.chunk.js"
+    "static/css/2.48db8b0f.chunk.css",
+    "static/js/2.59c56ba6.chunk.js",
+    "static/css/main.b4e0dcc7.chunk.css",
+    "static/js/main.34c60e3f.chunk.js"
   ]
 }
